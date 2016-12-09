@@ -1,0 +1,10 @@
+ATTENTE:
+
+3 Activité TV/MUSIQUE/Movie
+
+La partie musique
+    on doit pouvoir lire une musique 
+La partie Movie
+    on doit pouvoir lire le film et les metadonée
+La partie Serie
+    afficher les infos sur la série +metadonée
