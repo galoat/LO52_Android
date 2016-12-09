@@ -8,6 +8,7 @@
 
     android:layout_width="fill_parent"
 
-    android:layout_height="25px"
+    android:layout_height="100px"
 
-    android:textSize="23sp" />
+    android:textSize="20sp"
+    />

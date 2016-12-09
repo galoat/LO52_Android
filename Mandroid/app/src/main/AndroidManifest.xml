@@ -16,7 +16,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AndroidExplorer">
+        <activity android:name=".FileexplorerActivity">
+
+        </activity>
+        <activity android:name=".FileChooser">
 
         </activity>
     </application>
