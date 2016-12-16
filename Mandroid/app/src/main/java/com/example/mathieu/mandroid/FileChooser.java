@@ -6,10 +6,10 @@ package com.example.mathieu.mandroid;
 
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.sql.Date;
@@ -73,11 +73,13 @@ public class FileChooser extends ListActivity {
         adapter = new FileArrayAdapter(FileChooser.this,R.layout.row2,dir);
         this.setListAdapter(adapter);
     }
+
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         // TODO Auto-generated method stub
         super.onListItemClick(l, v, position, id);
         Item o = adapter.getItem(position);
+
         if(o.getImage().equalsIgnoreCase("directory_icon")||o.getImage().equalsIgnoreCase("directory_up")){
             currentDir = new File(o.getPath());
             fill(currentDir);
@@ -87,13 +89,18 @@ public class FileChooser extends ListActivity {
             onFileClick(o);
         }
     }
+
+
     private void onFileClick(Item o)
     {
+
+        Toast.makeText(FileChooser.this, getString(R.string.selectDir), Toast.LENGTH_LONG).show();
+
         //Toast.makeText(this, "Folder Clicked: "+ currentDir, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent();
+     /*   Intent intent = new Intent();
         intent.putExtra("GetPath",currentDir.toString());
         intent.putExtra("GetFileName",o.getName());
         setResult(RESULT_OK, intent);
-        finish();
+        finish();*/
     }
 }
