@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import java.io.File;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +31,15 @@ public class FileChooser extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        longClick();
+        currentDir = new File("/");
+        fill(currentDir);
+
+    }
+
+    private void longClick(){
         this.getListView().setLongClickable(true);
         //TODO afficher un "menu" permettant de cliquer sur importer
         this.getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -42,13 +54,11 @@ public class FileChooser extends ListActivity {
                 }else {
                     Toast.makeText(FileChooser.this, "il s'agit d'un fichier", Toast.LENGTH_LONG).show();
                 }
-                
+
                 return true;
             }
 
         });
-        currentDir = new File("/");
-        fill(currentDir);
     }
     private void fill(File f)
     {
@@ -122,6 +132,7 @@ public class FileChooser extends ListActivity {
         //Toast.makeText(this, "Folder Clicked: "+ currentDir, Toast.LENGTH_SHORT).show();
 
     }
+
 
 
 }
