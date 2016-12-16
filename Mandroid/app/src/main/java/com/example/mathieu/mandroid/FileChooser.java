@@ -6,8 +6,11 @@ package com.example.mathieu.mandroid;
 
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +28,25 @@ public class FileChooser extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getListView().setLongClickable(true);
+        //TODO afficher un "menu" permettant de cliquer sur importer
+        this.getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                Item o = adapter.getItem(position);
+                if(o.getImage().equalsIgnoreCase("directory_icon")||o.getImage().equalsIgnoreCase("directory_up")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("GetPath", currentDir.toString());
+                    intent.putExtra("GetFileName", o.getName());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }else {
+                    Toast.makeText(FileChooser.this, "il s'agit d'un fichier", Toast.LENGTH_LONG).show();
+                }
+                
+                return true;
+            }
+
+        });
         currentDir = new File("/");
         fill(currentDir);
     }
@@ -71,6 +93,7 @@ public class FileChooser extends ListActivity {
         if(!f.getName().equalsIgnoreCase("sdcard"))
             dir.add(0,new Item("..","Parent Directory","",f.getParent(),"directory_up"));
         adapter = new FileArrayAdapter(FileChooser.this,R.layout.row2,dir);
+
         this.setListAdapter(adapter);
     }
 
@@ -97,10 +120,8 @@ public class FileChooser extends ListActivity {
         Toast.makeText(FileChooser.this, getString(R.string.selectDir), Toast.LENGTH_LONG).show();
 
         //Toast.makeText(this, "Folder Clicked: "+ currentDir, Toast.LENGTH_SHORT).show();
-     /*   Intent intent = new Intent();
-        intent.putExtra("GetPath",currentDir.toString());
-        intent.putExtra("GetFileName",o.getName());
-        setResult(RESULT_OK, intent);
-        finish();*/
+
     }
+
+
 }
