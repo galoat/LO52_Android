@@ -52,8 +52,11 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
                        /* Take the ImageView from layout and set the city's image */
             ImageView imageCity = (ImageView) v.findViewById(R.id.fd_Icon1);
             String uri = "drawable/" + o.getImage();
-            int imageResource = c.getResources().getIdentifier(uri, null, c.getPackageName());
-            Drawable image = c.getResources().getDrawable(imageResource);
+            Drawable image;
+            if(o.getImage().equals("directory_icon"))
+                image = c.getResources().getDrawable(R.drawable.directory_icon);
+            else
+                image = c.getResources().getDrawable(R.drawable.file_icon);
             imageCity.setImageDrawable(image);
 
             if(t1!=null)
