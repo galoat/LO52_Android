@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static com.example.mathieu.mandroid.R.drawable.file_icon;
+
 public class FileArrayAdapter extends ArrayAdapter<Item>{
 
     private Context c;
@@ -55,8 +57,15 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
             Drawable image;
             if(o.getImage().equals("directory_icon"))
                 image = c.getResources().getDrawable(R.drawable.directory_icon);
+            else if(o.getImage().equals("file_icon"))
+                image = c.getResources().getDrawable(file_icon);
+            else if(o.getImage().equals("video"))
+                image = c.getResources().getDrawable(R.mipmap.video);
+            else if(o.getImage().equals("music"))
+                image = c.getResources().getDrawable(R.mipmap.music);
             else
-                image = c.getResources().getDrawable(R.drawable.file_icon);
+                image = c.getResources().getDrawable(R.drawable.imagedef);
+
             imageCity.setImageDrawable(image);
 
             if(t1!=null)

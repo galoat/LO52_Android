@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.example.mathieu.mandroid.R.string.dir;
+import static com.example.mathieu.mandroid.R.string.music;
+import static com.example.mathieu.mandroid.R.string.video;
 
 public class FileexplorerActivity extends Activity {
 
@@ -87,15 +89,39 @@ public class FileexplorerActivity extends Activity {
                         Date lastModDate = new Date(ff.lastModified());
                         DateFormat formater = DateFormat.getDateTimeInstance();
                         String date_modify = formater.format(lastModDate);
-                        fls.add( new Item(ff.getName(),ff.length()+"byt",date_modify,ff.getAbsolutePath(),getString(dir)));
+                        fls.add( new Item(ff.getName(),ff.length()+"byt",date_modify,ff.getAbsolutePath(),getString(video)));
                     }
                     ListView la=  (ListView) findViewById(R.id.listView);
                     FileArrayAdapter  adapter = new FileArrayAdapter(FileexplorerActivity.this,R.layout.row2,fls);
                     la.setAdapter(adapter);
                 }else if(position==1){
+                    File currentDir =  new File(curFileName+"/music");
 
+                    File[]dirs = currentDir.listFiles();
+                    List<Item> fls = new ArrayList<Item>();
+                    for(File ff: dirs){
+                        Date lastModDate = new Date(ff.lastModified());
+                        DateFormat formater = DateFormat.getDateTimeInstance();
+                        String date_modify = formater.format(lastModDate);
+                        fls.add( new Item(ff.getName(),ff.length()+"byt",date_modify,ff.getAbsolutePath(),getString(music)));
+                    }
+                    ListView la=  (ListView) findViewById(R.id.listView);
+                    FileArrayAdapter  adapter = new FileArrayAdapter(FileexplorerActivity.this,R.layout.row2,fls);
+                    la.setAdapter(adapter);
                 }else{
+                    File currentDir =  new File(curFileName+"/series");
 
+                    File[]dirs = currentDir.listFiles();
+                    List<Item> fls = new ArrayList<Item>();
+                    for(File ff: dirs){
+                        Date lastModDate = new Date(ff.lastModified());
+                        DateFormat formater = DateFormat.getDateTimeInstance();
+                        String date_modify = formater.format(lastModDate);
+                        fls.add( new Item(ff.getName(),ff.length()+"byt",date_modify,ff.getAbsolutePath(),getString(dir)));
+                    }
+                    ListView la=  (ListView) findViewById(R.id.listView);
+                    FileArrayAdapter  adapter = new FileArrayAdapter(FileexplorerActivity.this,R.layout.row2,fls);
+                    la.setAdapter(adapter);
                 }
             }
         });
