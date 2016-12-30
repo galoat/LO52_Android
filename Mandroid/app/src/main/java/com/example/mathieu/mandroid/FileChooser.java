@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,7 +18,6 @@ import java.io.File;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class FileChooser extends ListActivity {
 
 
         longClick();
-        currentDir = new File("/");
+        currentDir =  new File("/");
         fill(currentDir);
 
     }
@@ -47,7 +44,7 @@ public class FileChooser extends ListActivity {
                 Item o = adapter.getItem(position);
                 if(o.getImage().equalsIgnoreCase("directory_icon")||o.getImage().equalsIgnoreCase("directory_up")) {
                     Intent intent = new Intent();
-                    intent.putExtra("GetPath", currentDir.toString());
+                    intent.putExtra("GetPath", currentDir.getAbsolutePath());
                     intent.putExtra("GetFileName", o.getName());
                     setResult(RESULT_OK, intent);
                     finish();
