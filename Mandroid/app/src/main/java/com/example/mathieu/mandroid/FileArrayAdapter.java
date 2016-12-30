@@ -35,6 +35,9 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
     {
         return items.get(i);
     }
+
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
