@@ -42,7 +42,7 @@ public class FileChooser extends ListActivity {
         this.getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 Item o = adapter.getItem(position);
-                if(o.getImage().equalsIgnoreCase("directory_icon")||o.getImage().equalsIgnoreCase("directory_up")) {
+                if(o.getImage().equalsIgnoreCase("directory")||o.getImage().equalsIgnoreCase("directory_up")) {
                     Intent intent = new Intent();
                     intent.putExtra("GetPath", currentDir.getAbsolutePath());
                     intent.putExtra("GetFileName", o.getName());
@@ -110,7 +110,7 @@ public class FileChooser extends ListActivity {
         super.onListItemClick(l, v, position, id);
         Item o = adapter.getItem(position);
 
-        if(o.getImage().equalsIgnoreCase("directory_icon")||o.getImage().equalsIgnoreCase("directory_up")){
+        if(o.getImage().equalsIgnoreCase("directory")||o.getImage().equalsIgnoreCase("directory_up")){
             currentDir = new File(o.getPath());
             fill(currentDir);
         }

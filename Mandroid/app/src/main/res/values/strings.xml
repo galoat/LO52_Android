@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mandroid</string>
-    <string name="dir">directory_icon</string>
+    <string name="dir">directory</string>
     <string name="video">video</string>
     <string name="music">music</string>
     <string name="file">file</string>

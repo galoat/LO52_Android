@@ -58,14 +58,16 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
             ImageView imageCity = (ImageView) v.findViewById(R.id.fd_Icon1);
             String uri = "drawable/" + o.getImage();
             Drawable image;
-            if(o.getImage().equals("directory_icon"))
+            if(o.getImage().equals("directory"))
                 image = c.getResources().getDrawable(R.drawable.directory_icon);
-            else if(o.getImage().equals("file_icon"))
+            else if(o.getImage().equals("file"))
                 image = c.getResources().getDrawable(file_icon);
             else if(o.getImage().equals("video"))
                 image = c.getResources().getDrawable(R.mipmap.video);
             else if(o.getImage().equals("music"))
                 image = c.getResources().getDrawable(R.mipmap.music);
+            else if(o.getImage().equals("directory_up"))
+                image = c.getResources().getDrawable(R.drawable.ic_menu);
             else
                 image = c.getResources().getDrawable(R.drawable.imagedef);
 
