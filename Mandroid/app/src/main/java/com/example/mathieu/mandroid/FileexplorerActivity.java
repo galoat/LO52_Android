@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 import static com.example.mathieu.mandroid.R.id.listFilm;
+import static com.example.mathieu.mandroid.R.id.listView;
 import static com.example.mathieu.mandroid.R.string.video;
 
 public class FileexplorerActivity extends Activity {
@@ -31,7 +33,6 @@ public class FileexplorerActivity extends Activity {
     String curFileName;
     EditText edittext;
     List<Item> fls;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +63,9 @@ public class FileexplorerActivity extends Activity {
 
     }
 
-    private ListView addViewToPrincipalScreen(File cuurentDir){
-        ListView v =(ListView)findViewById(R.id.codec);
-        v.setAdapter(null);
+    private ListView addMetadataToRightView(File cuurentDir){
+        ListView listViewDroite =(ListView)findViewById(R.id.codec);
+        listViewDroite.setAdapter(null);
 
         File[] dirs = cuurentDir.listFiles();
         fls = new ArrayList<Item>();
@@ -74,21 +75,33 @@ public class FileexplorerActivity extends Activity {
             String date_modify = formater.format(lastModDate);
             fls.add(new Item(ff.getName(), ff.length() + "byt", date_modify, ff.getAbsolutePath(), getString(video)));
         }
-        ListView la = (ListView) findViewById(R.id.listView);
+        ListView la = (ListView) findViewById(listView);
         FileArrayAdapter adapter = new FileArrayAdapter(FileexplorerActivity.this, R.layout.row2, fls);
         la.setAdapter(adapter);
         return la;
+
     }
 
+
+    private File getFileAtPosition(int pos,String sousDossier){
+        Item o = fls.get(pos);
+        return new File(curFileName + "/"+sousDossier+"/"+o.getName());
+    }
+
+
     private void gestionMetadataFilm(int position){
-        Item o = fls.get(position);
+
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         FileArrayMetadataAdapter metaAdapter ;
+
         try {
-            File f = new File(curFileName + "/film/"+o.getName());
+            File f=  getFileAtPosition(position,"film");
             LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
             retriever.setDataSource(f.getAbsolutePath());
-            ItemMetadata met= new ItemMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE), retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            ItemMetadata met= new ItemMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION),
+                    f.getAbsolutePath());
             lis.add(met);
             metaAdapter= new FileArrayMetadataAdapter(FileexplorerActivity.this,R.layout.rowmetadata,lis);
             ListView v =(ListView)findViewById(R.id.codec);
@@ -122,25 +135,24 @@ public class FileexplorerActivity extends Activity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if (position == 0) {
                     File currentDir = new File(curFileName + "/film");
-                    ListView listVideo= addViewToPrincipalScreen(currentDir);
-
-
-                    listVideo.setOnItemClickListener(new OnItemClickListener() {
+                    ListView listLeft = addMetadataToRightView(currentDir);
+                    listLeft.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             gestionMetadataFilm(position);
                         }
                     });
+                    DrawerLayout mDrawerLayout =(DrawerLayout) findViewById(R.id.drawer_layout);
+                    mDrawerLayout.closeDrawers();
                 } else if (position == 1) {
                     File currentDir = new File(curFileName + "/music");
-
-                    ListView listMusic= addViewToPrincipalScreen(currentDir);
+                    ListView listView =  addMetadataToRightView(currentDir);
 
 
                 } else {
                     File currentDir = new File(curFileName + "/series");
 
-                    ListView listSeries= addViewToPrincipalScreen(currentDir);
+                    ListView listView = addMetadataToRightView(currentDir);
                 }
             }
         });

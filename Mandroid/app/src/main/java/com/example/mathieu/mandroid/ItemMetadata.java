@@ -9,12 +9,13 @@ public class ItemMetadata {
     private String bitrate;
     private String dateCreation;
     private String duration;
+    private String path;
 
-
-    public ItemMetadata(String bitrate, String dateCreation, String duration) {
+    public ItemMetadata(String bitrate, String dateCreation, String duration,String path) {
         this.bitrate = bitrate;
         this.dateCreation = dateCreation;
         this.duration = duration;
+        this.path=path;
     }
 
     public String getBitrate() {
@@ -39,5 +40,13 @@ public class ItemMetadata {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
