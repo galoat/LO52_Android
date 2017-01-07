@@ -23,8 +23,6 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 import static com.example.mathieu.mandroid.R.id.listFilm;
-import static com.example.mathieu.mandroid.R.string.dir;
-import static com.example.mathieu.mandroid.R.string.music;
 import static com.example.mathieu.mandroid.R.string.video;
 
 public class FileexplorerActivity extends Activity {
@@ -64,7 +62,22 @@ public class FileexplorerActivity extends Activity {
 
     }
 
+    private ListView addPrincipalTab(File cuurentDir){
 
+
+        File[] dirs = cuurentDir.listFiles();
+        fls = new ArrayList<Item>();
+        for (File ff : dirs) {
+            Date lastModDate = new Date(ff.lastModified());
+            DateFormat formater = DateFormat.getDateTimeInstance();
+            String date_modify = formater.format(lastModDate);
+            fls.add(new Item(ff.getName(), ff.length() + "byt", date_modify, ff.getAbsolutePath(), getString(video)));
+        }
+        ListView la = (ListView) findViewById(R.id.listView);
+        FileArrayAdapter adapter = new FileArrayAdapter(FileexplorerActivity.this, R.layout.row2, fls);
+        la.setAdapter(adapter);
+        return la;
+    }
     private void menusDeroulant() {
         //Gestion de l'affichage du menus deroulant
         ListView listview = (ListView) findViewById(listFilm);
@@ -82,24 +95,16 @@ public class FileexplorerActivity extends Activity {
         listview.setAdapter(adapter);
 
 
+
         listview.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if (position == 0) {
                     File currentDir = new File(curFileName + "/film");
+                    ListView listVideo= addPrincipalTab(currentDir);
 
-                    File[] dirs = currentDir.listFiles();
-                    fls = new ArrayList<Item>();
-                    for (File ff : dirs) {
-                        Date lastModDate = new Date(ff.lastModified());
-                        DateFormat formater = DateFormat.getDateTimeInstance();
-                        String date_modify = formater.format(lastModDate);
-                        fls.add(new Item(ff.getName(), ff.length() + "byt", date_modify, ff.getAbsolutePath(), getString(video)));
-                    }
-                    ListView la = (ListView) findViewById(R.id.listView);
-                    FileArrayAdapter adapter = new FileArrayAdapter(FileexplorerActivity.this, R.layout.row2, fls);
-                    la.setAdapter(adapter);
-                    la.setOnItemClickListener(new OnItemClickListener() {
+
+                    listVideo.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Item o = fls.get(position);
@@ -123,31 +128,13 @@ public class FileexplorerActivity extends Activity {
                 } else if (position == 1) {
                     File currentDir = new File(curFileName + "/music");
 
-                    File[] dirs = currentDir.listFiles();
-                    List<Item> fls = new ArrayList<Item>();
-                    for (File ff : dirs) {
-                        Date lastModDate = new Date(ff.lastModified());
-                        DateFormat formater = DateFormat.getDateTimeInstance();
-                        String date_modify = formater.format(lastModDate);
-                        fls.add(new Item(ff.getName(), ff.length() + "byt", date_modify, ff.getAbsolutePath(), getString(music)));
-                    }
-                    ListView la = (ListView) findViewById(R.id.listView);
-                    FileArrayAdapter adapter = new FileArrayAdapter(FileexplorerActivity.this, R.layout.row2, fls);
-                    la.setAdapter(adapter);
+                    ListView listMusic= addPrincipalTab(currentDir);
+
+
                 } else {
                     File currentDir = new File(curFileName + "/series");
 
-                    File[] dirs = currentDir.listFiles();
-                    List<Item> fls = new ArrayList<Item>();
-                    for (File ff : dirs) {
-                        Date lastModDate = new Date(ff.lastModified());
-                        DateFormat formater = DateFormat.getDateTimeInstance();
-                        String date_modify = formater.format(lastModDate);
-                        fls.add(new Item(ff.getName(), ff.length() + "byt", date_modify, ff.getAbsolutePath(), getString(dir)));
-                    }
-                    ListView la = (ListView) findViewById(R.id.listView);
-                    FileArrayAdapter adapter = new FileArrayAdapter(FileexplorerActivity.this, R.layout.row2, fls);
-                    la.setAdapter(adapter);
+                    ListView listSeries= addPrincipalTab(currentDir);
                 }
             }
         });
