@@ -62,8 +62,9 @@ public class FileexplorerActivity extends Activity {
 
     }
 
-    private ListView addPrincipalTab(File cuurentDir){
-
+    private ListView addViewToPrincipalScreen(File cuurentDir){
+        ListView v =(ListView)findViewById(R.id.codec);
+        v.setAdapter(null);
 
         File[] dirs = cuurentDir.listFiles();
         fls = new ArrayList<Item>();
@@ -78,6 +79,26 @@ public class FileexplorerActivity extends Activity {
         la.setAdapter(adapter);
         return la;
     }
+
+    private void gestionMetadataFilm(int position){
+        Item o = fls.get(position);
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        FileArrayMetadataAdapter metaAdapter ;
+        try {
+            File f = new File(curFileName + "/film/"+o.getName());
+            LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
+            retriever.setDataSource(f.getAbsolutePath());
+            ItemMetadata met= new ItemMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE), retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            lis.add(met);
+            metaAdapter= new FileArrayMetadataAdapter(FileexplorerActivity.this,R.layout.rowmetadata,lis);
+            ListView v =(ListView)findViewById(R.id.codec);
+            v.setAdapter(metaAdapter);
+        }catch (Exception e){
+            Log.e(TAG, "Exception : " + e.getMessage());
+        }
+
+    }
+
     private void menusDeroulant() {
         //Gestion de l'affichage du menus deroulant
         ListView listview = (ListView) findViewById(listFilm);
@@ -101,40 +122,25 @@ public class FileexplorerActivity extends Activity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if (position == 0) {
                     File currentDir = new File(curFileName + "/film");
-                    ListView listVideo= addPrincipalTab(currentDir);
+                    ListView listVideo= addViewToPrincipalScreen(currentDir);
 
 
                     listVideo.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Item o = fls.get(position);
-                            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-                            FileArrayMetadataAdapter metaAdapter ;
-                            try {
-                                File f = new File(curFileName + "/film/"+o.getName());
-                                LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
-                                retriever.setDataSource(f.getAbsolutePath());
-                                ItemMetadata met= new ItemMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE), retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
-                                lis.add(met);
-                                metaAdapter= new FileArrayMetadataAdapter(FileexplorerActivity.this,R.layout.rowmetadata,lis);
-                                ListView v =(ListView)findViewById(R.id.codec);
-                                v.setAdapter(metaAdapter);
-                            }catch (Exception e){
-                                Log.e(TAG, "Exception : " + e.getMessage());
-                            }
-
+                            gestionMetadataFilm(position);
                         }
                     });
                 } else if (position == 1) {
                     File currentDir = new File(curFileName + "/music");
 
-                    ListView listMusic= addPrincipalTab(currentDir);
+                    ListView listMusic= addViewToPrincipalScreen(currentDir);
 
 
                 } else {
                     File currentDir = new File(curFileName + "/series");
 
-                    ListView listSeries= addPrincipalTab(currentDir);
+                    ListView listSeries= addViewToPrincipalScreen(currentDir);
                 }
             }
         });
