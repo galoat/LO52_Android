@@ -32,7 +32,12 @@ public class FileChooser extends ListActivity {
 
         longClick();
         currentDir =  new File("/");
-        fill(currentDir);
+
+        try {
+            fill(currentDir);
+        }catch (Exception e){
+            Toast.makeText(FileChooser.this, getString(R.string.pasDeDossier), Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -57,13 +62,13 @@ public class FileChooser extends ListActivity {
 
         });
     }
-    private void fill(File f)
+    private void fill(File f) throws Exception
     {
         File[]dirs = f.listFiles();
         this.setTitle("Current Dir: "+f.getName());
         List<Item>dir = new ArrayList<Item>();
         List<Item>fls = new ArrayList<Item>();
-        try{
+
             for(File ff: dirs)
             {
                 Date lastModDate = new Date(ff.lastModified());
@@ -90,10 +95,7 @@ public class FileChooser extends ListActivity {
                     fls.add(new Item(ff.getName(),ff.length() + " Byte", date_modify, ff.getAbsolutePath(),getString(R.string.file)));
                 }
             }
-        }catch(Exception e)
-        {
 
-        }
         Collections.sort(dir);
         Collections.sort(fls);
         dir.addAll(fls);
@@ -111,8 +113,14 @@ public class FileChooser extends ListActivity {
         Item o = adapter.getItem(position);
 
         if(o.getImage().equalsIgnoreCase("directory")||o.getImage().equalsIgnoreCase("directory_up")){
-            currentDir = new File(o.getPath());
-            fill(currentDir);
+            try {
+                currentDir = new File(o.getPath());
+                fill(currentDir);
+            }catch (Exception e){
+                Toast.makeText(FileChooser.this, getString(R.string.pasDeDossier), Toast.LENGTH_LONG).show();
+
+            }
+
         }
         else
         {

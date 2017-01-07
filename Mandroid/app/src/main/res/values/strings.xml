@@ -7,4 +7,5 @@
     <string name="selectDir">veuillez selectionner un Dossier</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="pasDeDossier">Pas de dossier</string>
 </resources>
