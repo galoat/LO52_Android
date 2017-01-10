@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mathieu.mandroid.Adapters.FileArrayAdapter;
-import com.example.mathieu.mandroid.Adapters.Item;
+import com.example.mathieu.mandroid.Adapters.Item.Item;
 import com.example.mathieu.mandroid.R;
 
 import java.io.File;

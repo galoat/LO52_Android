@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mathieu.mandroid.Adapters.Item.Item;
 import com.example.mathieu.mandroid.R;
 
 import java.util.List;

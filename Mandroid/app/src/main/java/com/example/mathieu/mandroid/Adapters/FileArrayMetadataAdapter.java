@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.mathieu.mandroid.Adapters.Item.ItemMetadata;
 import com.example.mathieu.mandroid.R;
 
 import java.util.List;
@@ -21,9 +22,9 @@ import java.util.List;
  */
 
 public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
-    private Context c;
-    private int id;
-    private List<ItemMetadata>items;
+    protected Context c;
+    protected int id;
+    protected List<ItemMetadata>items;
     DrawerListener drawerListener;
     DrawerLayout drawerLayout;
 
