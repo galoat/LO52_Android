@@ -1,4 +1,4 @@
-package com.example.mathieu.mandroid;
+package com.example.mathieu.mandroid.Adapters;
 
 /**
  * Created by Mathieu on 09/12/2016.

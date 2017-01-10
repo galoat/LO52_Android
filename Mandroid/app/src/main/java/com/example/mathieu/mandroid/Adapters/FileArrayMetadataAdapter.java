@@ -1,4 +1,4 @@
-package com.example.mathieu.mandroid;
+package com.example.mathieu.mandroid.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.mathieu.mandroid.R;
 
 import java.util.List;
 

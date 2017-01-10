@@ -1,4 +1,4 @@
-package com.example.mathieu.mandroid;
+package com.example.mathieu.mandroid.Adapters;
 
 /**
  * Created by Mathieu on 09/12/2016.
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.mathieu.mandroid.R;
 
 import java.util.List;
 

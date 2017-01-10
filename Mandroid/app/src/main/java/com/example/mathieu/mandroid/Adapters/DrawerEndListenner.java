@@ -1,4 +1,4 @@
-package com.example.mathieu.mandroid;
+package com.example.mathieu.mandroid.Adapters;
 
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
@@ -6,6 +6,8 @@ import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import com.example.mathieu.mandroid.Activiter.AcitivityVideo;
 
 /**
  * Created by Florian on 08/01/2017.
@@ -16,11 +18,6 @@ public class DrawerEndListenner implements DrawerListener {
     ViewGroup parent;
     OnClickListener meta;
     DrawerLayout lay;
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        lay.removeDrawerListener(this);
-    }
-
-
 
     DrawerEndListenner(String path, final ViewGroup parent,DrawerLayout lay){
         this.path=path;
@@ -43,6 +40,7 @@ public class DrawerEndListenner implements DrawerListener {
         Intent intent= new Intent(parent.getContext(),AcitivityVideo.class);
         intent.putExtra("path",path);
         parent.getContext().startActivity(intent);
+
     }
 
     @Override

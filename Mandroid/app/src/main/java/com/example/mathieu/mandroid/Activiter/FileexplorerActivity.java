@@ -1,4 +1,4 @@
-package com.example.mathieu.mandroid;
+package com.example.mathieu.mandroid.Activiter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.mathieu.mandroid.Adapters.FileArrayAdapter;
+import com.example.mathieu.mandroid.Adapters.FileArrayMetadataAdapter;
+import com.example.mathieu.mandroid.Adapters.Item;
+import com.example.mathieu.mandroid.Adapters.ItemMetadata;
+import com.example.mathieu.mandroid.R;
 
 import java.io.File;
 import java.sql.Date;

@@ -1,4 +1,4 @@
-package com.example.mathieu.mandroid;
+package com.example.mathieu.mandroid.Activiter;
 
 /**
  * Created by Mathieu on 09/12/2016.
@@ -13,6 +13,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.mathieu.mandroid.Adapters.FileArrayAdapter;
+import com.example.mathieu.mandroid.Adapters.Item;
+import com.example.mathieu.mandroid.R;
 
 import java.io.File;
 import java.sql.Date;
