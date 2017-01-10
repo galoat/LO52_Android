@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.content.ContentValues.TAG;
 import static com.example.mathieu.mandroid.R.id.listFilm;
@@ -127,10 +129,23 @@ public class FileexplorerActivity extends Activity {
             File f=  getFileAtPosition(position,"series");
             LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
             retriever.setDataSource(f.getAbsolutePath());
+
             ItemSerieMetadata met= new ItemSerieMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
                     retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),
                     retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION),
                     f.getAbsolutePath());
+            String filename=f.getName();
+            Pattern pattern= Pattern.compile(".*[sS](\\d{2})[eE](\\d{2}).*");
+            Matcher m = pattern.matcher(filename);
+            boolean result=  m.matches();
+            if(result){
+               met.setSaison(m.group(1));
+               met.setEpisode(m.group(2));
+
+            }
+
+
+
             lis.add(met);
             metaAdapter= new FileArraySeriesMetadataAdapter(FileexplorerActivity.this,R.layout.rowseriemetadata,lis);
             ListView v =(ListView)findViewById(R.id.codec);
@@ -170,8 +185,7 @@ public class FileexplorerActivity extends Activity {
                             gestionMetadataFilm(position);
                         }
                     });
-                    DrawerLayout mDrawerLayout =(DrawerLayout) findViewById(R.id.drawer_layout);
-                    mDrawerLayout.closeDrawers();
+
                 } else if (position == 1) {
                     File currentDir = new File(curFileName + "/music");
                     ListView listView =  addMetadataToRightView(currentDir);
@@ -183,12 +197,17 @@ public class FileexplorerActivity extends Activity {
                     listView.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            gestionMetadataSerie  (position);
+                            gestionMetadataSerie(position);
                         }
 
-                    });
+                    }
+
+
+                    );
 
                 }
+                DrawerLayout mDrawerLayout =(DrawerLayout) findViewById(R.id.drawer_layout);
+                mDrawerLayout.closeDrawers();
             }
         });
 

@@ -8,4 +8,9 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="pasDeDossier">Pas de dossier</string>
+    <string name="Date">date </string>
+    <string name="play">play</string>
+    <string name="bitrate">bitrate</string>
+    <string name="saison">Saison </string>
+    <string name="episode">episode </string>
 </resources>

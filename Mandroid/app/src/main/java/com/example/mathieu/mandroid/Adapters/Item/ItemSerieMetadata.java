@@ -12,7 +12,23 @@ public class ItemSerieMetadata extends ItemMetadata {
     }
     public ItemSerieMetadata(String bitrate, String dateCreation, String duration, String path, String episode,String saison) {
         super(bitrate, dateCreation, duration, path);
-        this.episode=episode;
-        this.saison=saison;
+        this.episode = episode;
+        this.saison = saison;
+    }
+
+    public String getEpisode() {
+        return episode;
+    }
+
+    public void setEpisode(String episode) {
+        this.episode = episode;
+    }
+
+    public String getSaison() {
+        return saison;
+    }
+
+    public void setSaison(String saison) {
+        this.saison = saison;
     }
 }

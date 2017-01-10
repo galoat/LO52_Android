@@ -28,8 +28,9 @@ public class FileArraySeriesMetadataAdapter extends FileArrayMetadataAdapter {
         final ItemSerieMetadata o = (ItemSerieMetadata)items.get(position);
         if(o!=null){
             TextView t1 = (TextView) v.findViewById(R.id.saisonInput);
-            t1.setText("fr,fk,rl");
-
+            t1.setText(o.getSaison());
+            TextView t2 = (TextView) v.findViewById(R.id.episodeInput);
+            t2.setText(o.getEpisode());
         }
         return v;
     }

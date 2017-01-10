@@ -1,33 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <TextView android:text="saison "
+              android:layout_height="match_parent"
+              android:orientation="vertical" >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView android:text="@string/saison"
               android:id="@+id/saisonText"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:singleLine="true"
+              android:maxLines="1"
               android:textStyle="bold"
-              android:layout_below="@+id/labelBitrate"
               android:layout_marginTop="20dip"
-              android:layout_marginLeft="5dip">
+              android:layout_marginLeft="5dip"
+              android:layout_marginStart="5dip"
+
+        >
     </TextView>
     <TextView android:text=""
               android:id="@+id/saisonInput"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:singleLine="true"
+              android:maxLines="1"
               android:textStyle="bold"
               android:layout_toRightOf="@id/saisonText"
               android:layout_toEndOf="@id/saisonText"
               android:layout_marginTop="20dip"
-              android:layout_marginLeft="5dip">
+              android:layout_marginLeft="5dip"
+              android:layout_marginStart="5dip"
+        >
     </TextView>
-
-    <include layout="@layout/rowmetadata"
-             android:layout_alignBottom="@+id/saisonText"
-             android:layout_alignParentLeft="true"
-             android:layout_alignParentStart="true"></include>
-</RelativeLayout>
+</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView android:text="@string/episode"
+              android:id="@+id/episode"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:maxLines="1"
+              android:textStyle="bold"
+              android:layout_below="@+id/saisonText"
+              android:layout_marginTop="20dip"
+              android:layout_marginLeft="5dip"
+              android:layout_marginStart="5dip">
+    </TextView>
+    <TextView android:text=""
+              android:id="@+id/episodeInput"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:maxLines="1"
+              android:textStyle="bold"
+              android:layout_toRightOf="@id/saisonText"
+              android:layout_toEndOf="@id/saisonText"
+              android:layout_below= "@id/saisonInput"
+              android:layout_marginTop="20dip"
+              android:layout_marginLeft="5dip"
+               android:layout_marginStart="5dip"
+        >
+    </TextView>
+        </LinearLayout>
+    <include layout="@layout/rowmetadata"/>
+</LinearLayout>
