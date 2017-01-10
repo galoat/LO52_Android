@@ -9,13 +9,13 @@
               android:layout_height="wrap_content"
               android:textStyle="bold"
               android:layout_marginTop="5dip"
-              android:layout_marginLeft="5dip">
+              >
     </TextView>
     <TextView android:text=''
               android:id="@+id/inputBirate"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:singleLine="true"
+              android:maxLines="1"
               android:textStyle="bold"
               android:layout_toRightOf="@+id/labelBitrate"
               android:layout_marginTop="5dip"
@@ -29,24 +29,24 @@
               android:textStyle="bold"
               android:layout_below="@+id/labelBitrate"
               android:layout_marginTop="20dip"
-              android:layout_marginLeft="5dip">
+              >
     </TextView>
     <TextView android:text=""
               android:id="@+id/inputDate"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:singleLine="true"
               android:textStyle="bold"
-              android:layout_toRightOf="@id/labelDate"
-              android:layout_toEndOf="@id/labelDate"
+              android:layout_below="@+id/inputBirate"
+              android:layout_toRightOf="@+id/labelDate"
               android:layout_marginTop="20dip"
-              android:layout_marginLeft="5dip">
+                >
     </TextView>
     <Button
         android:text="Play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/PlayButton"
+        android:layout_marginTop="20dip"
         android:layout_below="@+id/inputDate"
         />
 </RelativeLayout>

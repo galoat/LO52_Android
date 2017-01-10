@@ -1,5 +1,10 @@
 package com.example.mathieu.mandroid.Adapters.Item;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by Florian on 31/12/2016.
  */
@@ -13,9 +18,16 @@ public class ItemMetadata {
 
     public ItemMetadata(String bitrate, String dateCreation, String duration,String path) {
         this.bitrate = bitrate;
-        this.dateCreation = dateCreation;
+        Date inputDate = null;
+        try {
+            inputDate = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.getDefault()).parse(dateCreation);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.dateCreation = new SimpleDateFormat("dd'/'MM'/'yy", Locale.getDefault()).format(inputDate);
         this.duration = duration;
         this.path=path;
+
     }
 
     public String getBitrate() {
