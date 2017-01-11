@@ -16,7 +16,13 @@ public class ItemMetadata {
     private String duration;
     private String path;
 
-    public ItemMetadata(String bitrate, String dateCreation, String duration,String path) {
+    public ItemMetadata(String bitrate, String duration, String path) {
+        this.bitrate = bitrate;
+        this.duration = duration;
+        this.path = path;
+    }
+
+    public ItemMetadata(String bitrate, String dateCreation, String duration, String path) {
         this.bitrate = bitrate;
         Date inputDate = null;
         try {

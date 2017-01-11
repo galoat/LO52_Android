@@ -16,10 +16,12 @@ import android.widget.ListView;
 
 import com.example.mathieu.mandroid.Adapters.FileArrayAdapter;
 import com.example.mathieu.mandroid.Adapters.FileArrayMetadataAdapter;
+import com.example.mathieu.mandroid.Adapters.FileArrayMusicMetadataAdapter;
 import com.example.mathieu.mandroid.Adapters.FileArraySeriesMetadataAdapter;
 import com.example.mathieu.mandroid.Adapters.Item.Item;
 import com.example.mathieu.mandroid.Adapters.Item.ItemMetadata;
 import com.example.mathieu.mandroid.Adapters.Item.ItemSerieMetadata;
+import com.example.mathieu.mandroid.Adapters.Item.ItemSongMetadata;
 import com.example.mathieu.mandroid.R;
 
 import java.io.File;
@@ -128,7 +130,7 @@ public class FileexplorerActivity extends Activity {
         try {
             File f=  getFileAtPosition(position,"series");
             LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
-            retriever.setDataSource(f.getAbsolutePath());
+            retriever.setDataSource(f.getPath());
 
             ItemSerieMetadata met= new ItemSerieMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
                     retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),
@@ -148,6 +150,26 @@ public class FileexplorerActivity extends Activity {
 
             lis.add(met);
             metaAdapter= new FileArraySeriesMetadataAdapter(FileexplorerActivity.this,R.layout.rowseriemetadata,lis);
+            ListView v =(ListView)findViewById(R.id.codec);
+            v.setAdapter(metaAdapter);
+        }catch (Exception e){
+            Log.e(TAG, "Exception : " + e.getMessage());
+        }
+    }
+
+    public void gestionMetadatamusic(int position){
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        FileArrayMetadataAdapter metaAdapter ;
+        try {
+            File f=  getFileAtPosition(position,"music");
+            LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
+            retriever.setDataSource(f.getAbsolutePath());
+
+            ItemMetadata met= new ItemSongMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION),
+                    f.getAbsolutePath());
+            lis.add(met);
+            metaAdapter= new FileArrayMusicMetadataAdapter(FileexplorerActivity.this,R.layout.rowmusicmetadata,lis);
             ListView v =(ListView)findViewById(R.id.codec);
             v.setAdapter(metaAdapter);
         }catch (Exception e){
@@ -190,7 +212,13 @@ public class FileexplorerActivity extends Activity {
                     File currentDir = new File(curFileName + "/music");
                     ListView listView =  addMetadataToRightView(currentDir);
 
+                    listView.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            gestionMetadatamusic(position);
+                        }
 
+                    });
                 } else {
                     File currentDir = new File(curFileName + "/series");
                     ListView listView = addMetadataToRightView(currentDir);

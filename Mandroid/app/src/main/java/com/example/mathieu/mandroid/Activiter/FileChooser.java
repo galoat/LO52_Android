@@ -32,11 +32,8 @@ public class FileChooser extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         longClick();
         currentDir =  new File("/");
-
         try {
             fill(currentDir);
         }catch (Exception e){

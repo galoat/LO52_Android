@@ -50,16 +50,20 @@ public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
             LayoutInflater vi = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(id, null);
         }
-
-
-
-
         final ItemMetadata o = items.get(position);
         if (o != null) {
             TextView t1 = (TextView) v.findViewById(R.id.inputBirate);
             TextView t2 = (TextView) v.findViewById(R.id.inputDate);
-            t1.setText(o.getBitrate());
-            t2.setText(o.getDateCreation());
+            if(o.getBitrate() ==""){
+                t1.setText(getContext().getString(R.string.nothing));
+            }else{
+                t1.setText(o.getBitrate());
+            }
+            if(o.getDateCreation() ==""){
+                t2.setText(getContext().getString(R.string.nothing));
+            }else {
+                t2.setText(o.getDateCreation());
+            }
 
          }
         if(drawerListener!=null){
@@ -77,25 +81,6 @@ public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
                 drawerLayout.closeDrawers();
                 drawerListener = new DrawerEndListenner(o.getPath(), parent, drawerLayout);
                 drawerLayout.addDrawerListener(drawerListener);
-
-             /*
-                pout l'audio
-
-
-                File f= new File(o.getPath());
-
-                Uri uri=Uri.fromFile(f);
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                try {
-                    mediaPlayer.setDataSource(parent.getContext().getApplicationContext(), uri);
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mediaPlayer.start();*/
-
-
             }
         });
 

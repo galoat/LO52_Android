@@ -13,4 +13,6 @@
     <string name="bitrate">bitrate</string>
     <string name="saison">Saison </string>
     <string name="episode">episode </string>
+    <string name="stop">stop </string>
+    <string name="nothing">-------- </string>
 </resources>
