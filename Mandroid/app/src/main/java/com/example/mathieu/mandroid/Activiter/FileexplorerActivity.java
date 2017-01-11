@@ -75,12 +75,12 @@ public class FileexplorerActivity extends Activity {
 
     }
 
-    private ListView addMetadataToRightView(File cuurentDir){
+    private ListView addMetadataToRightView(File curentDir){
         ListView listViewDroite =(ListView)findViewById(R.id.codec);
         listViewDroite.setAdapter(null);
 
-        File[] dirs = cuurentDir.listFiles();
-        fls = new ArrayList<Item>();
+        File[] dirs = curentDir.listFiles();
+        fls = new ArrayList<>();
         for (File ff : dirs) {
             Date lastModDate = new Date(ff.lastModified());
             DateFormat formater = DateFormat.getDateTimeInstance();
@@ -108,7 +108,7 @@ public class FileexplorerActivity extends Activity {
 
         try {
             File f=  getFileAtPosition(position,"film");
-            LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
+            LinkedList<ItemMetadata> lis= new LinkedList<>();
             retriever.setDataSource(f.getAbsolutePath());
             ItemMetadata met= new ItemMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
                     retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE),
@@ -129,7 +129,7 @@ public class FileexplorerActivity extends Activity {
 
         try {
             File f=  getFileAtPosition(position,"series");
-            LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
+            LinkedList<ItemMetadata> lis= new LinkedList<>();
             retriever.setDataSource(f.getPath());
 
             ItemSerieMetadata met= new ItemSerieMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
@@ -157,21 +157,22 @@ public class FileexplorerActivity extends Activity {
         }
     }
 
-    public void gestionMetadatamusic(int position){
+    public void gestionMetadataMusic(int position){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         FileArrayMetadataAdapter metaAdapter ;
         try {
             File f=  getFileAtPosition(position,"music");
-            LinkedList<ItemMetadata> lis= new LinkedList<ItemMetadata>();
+            LinkedList<ItemMetadata> lis= new LinkedList<>();
             retriever.setDataSource(f.getAbsolutePath());
 
-            ItemMetadata met= new ItemSongMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
-                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION),
+            ItemSongMetadata met= new ItemSongMetadata(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE),
                     f.getAbsolutePath());
+            met.setEchantilloage(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             lis.add(met);
             metaAdapter= new FileArrayMusicMetadataAdapter(FileexplorerActivity.this,R.layout.rowmusicmetadata,lis);
             ListView v =(ListView)findViewById(R.id.codec);
             v.setAdapter(metaAdapter);
+            //get image peut être null
         }catch (Exception e){
             Log.e(TAG, "Exception : " + e.getMessage());
         }
@@ -187,9 +188,9 @@ public class FileexplorerActivity extends Activity {
                 "serie"
         };
 
-        ArrayList<String> planetList = new ArrayList<String>();
+        ArrayList<String> planetList = new ArrayList<>();
         planetList.addAll(Arrays.asList(name));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, planetList);
         listview.setAdapter(adapter);
 
@@ -215,7 +216,7 @@ public class FileexplorerActivity extends Activity {
                     listView.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            gestionMetadatamusic(position);
+                            gestionMetadataMusic(position);
                         }
 
                     });

@@ -18,8 +18,8 @@ public class AcitivityVideo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityvideo);
-        final Intent intent= getIntent();
-        String uri =intent.getStringExtra("path");
+        final Intent intent = getIntent();
+        String uri = intent.getStringExtra("path");
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
         videoView.setVideoPath(uri);
         videoView.start();

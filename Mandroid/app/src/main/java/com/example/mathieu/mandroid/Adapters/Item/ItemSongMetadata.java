@@ -10,7 +10,7 @@ public class ItemSongMetadata   extends ItemMetadata{
     protected String keyArtist;
     protected String keyTrackNumber;
     protected String keyDate;
-
+    protected String echantilloage;
     public ItemSongMetadata(String bitrate, String dateCreation, String duration, String path, String keyAlbum, String keyAlmbumArtist, String keyArtist, String keyTrackNumber, String keyDate) {
         super(bitrate, dateCreation, duration, path);
         this.keyAlbum = keyAlbum;
@@ -32,6 +32,10 @@ public class ItemSongMetadata   extends ItemMetadata{
     public ItemSongMetadata(String bitrate, String duration, String path)
     {
         super(bitrate, duration, path);
+    }
+    public ItemSongMetadata(String bitrate, String path)
+    {
+        super(bitrate,  path);
     }
     public ItemSongMetadata(String bitrate, String dateCreation, String duration, String path) {
         super(bitrate, dateCreation, duration, path);
@@ -76,5 +80,13 @@ public class ItemSongMetadata   extends ItemMetadata{
 
     public void setKeyDate(String keyDate) {
         this.keyDate = keyDate;
+    }
+
+    public String getEchantilloage() {
+        return echantilloage;
+    }
+
+    public void setEchantilloage(String echantilloage) {
+        this.echantilloage = echantilloage;
     }
 }
