@@ -44,6 +44,12 @@ public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
         return items.get(i);
     }
 
+    public void removeBindDrawerListenner(){
+        if(drawerListener!=null){
+            drawerLayout.removeDrawerListener(drawerListener);
+            drawerListener=null;
+        }
+    }
     @NonNull
     @Override
     public View getView(int position, final View convertView, final ViewGroup parent) {
@@ -68,10 +74,7 @@ public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
             }
 
          }
-        if(drawerListener!=null){
-            drawerLayout.removeDrawerListener(drawerListener);
-            drawerListener=null;
-        }
+
 
         Button buttonPlay = (Button) v.findViewById(R.id.PlayButton);
 
@@ -81,7 +84,7 @@ public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
 
                 drawerLayout = (DrawerLayout) ((Activity) getContext()).getWindow().getDecorView().findViewById(R.id.drawer_layout);
                 drawerLayout.closeDrawers();
-                drawerListener = new DrawerEndListenner(o.getPath(), parent, drawerLayout);
+                drawerListener = new DrawerEndListenner(o.getPath(), parent,FileArrayMetadataAdapter.this);
                 drawerLayout.addDrawerListener(drawerListener);
             }
         });
