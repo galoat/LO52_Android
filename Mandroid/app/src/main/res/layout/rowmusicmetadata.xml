@@ -14,7 +14,6 @@
                   android:layout_height="wrap_content"
                   android:maxLines="1"
                   android:textStyle="bold"
-                  android:layout_below="@+id/saisonText"
                   android:layout_marginTop="20dip"
                   android:layout_marginLeft="5dip"
                   android:layout_marginStart="5dip">

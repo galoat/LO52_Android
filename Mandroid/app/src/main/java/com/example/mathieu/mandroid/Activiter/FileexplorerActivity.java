@@ -177,6 +177,10 @@ public class FileexplorerActivity extends Activity {
             Log.e(TAG, "Exception : " + e.getMessage());
         }
     }
+    private void openDrawerMetadata(){
+        DrawerLayout mDrawerLayout =(DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.openDrawer(findViewById(R.id.codec));
+    }
 
     private void menusDeroulant() {
         //Gestion de l'affichage du menus deroulant
@@ -206,6 +210,7 @@ public class FileexplorerActivity extends Activity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             gestionMetadataFilm(position);
+                            openDrawerMetadata();
                         }
                     });
 
@@ -217,6 +222,7 @@ public class FileexplorerActivity extends Activity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             gestionMetadataMusic(position);
+                            openDrawerMetadata();
                         }
 
                     });
@@ -227,6 +233,8 @@ public class FileexplorerActivity extends Activity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             gestionMetadataSerie(position);
+                            openDrawerMetadata();
+
                         }
 
                     }
