@@ -12,6 +12,9 @@ import com.example.mathieu.mandroid.R;
  * Created by Florian on 07/01/2017.
  */
 
+/**
+ * Activiter Video is responsable to display the video
+ */
 public class AcitivityVideo extends Activity {
 
     @Override

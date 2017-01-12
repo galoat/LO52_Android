@@ -70,6 +70,8 @@ public class FileexplorerActivity extends Activity {
                 curFileName = curFileName + "/" + data.getStringExtra("GetFileName");
                 edittext.setText(curFileName);
                 PreferenceManager.getDefaultSharedPreferences(this).edit().putString("nomDir", curFileName).apply();
+                DrawerLayout mDrawerLayout =(DrawerLayout) findViewById(R.id.drawer_layout);
+                mDrawerLayout.openDrawer(findViewById(R.id.listFilm));
             }
         }
 
