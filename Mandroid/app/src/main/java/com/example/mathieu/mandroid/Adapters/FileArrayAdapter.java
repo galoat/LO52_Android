@@ -21,6 +21,10 @@ import java.util.List;
 
 import static com.example.mathieu.mandroid.R.drawable.file_icon;
 
+/**
+ * FileArrayDisplayer is the Adapter responsable for the display of
+ * the listView in FileChosser and the pincipal view in fileExplorer
+ */
 public class FileArrayAdapter extends ArrayAdapter<Item>{
 
     private Context c;

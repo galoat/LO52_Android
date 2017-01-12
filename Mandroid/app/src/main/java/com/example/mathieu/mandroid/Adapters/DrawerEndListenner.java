@@ -1,10 +1,8 @@
 package com.example.mathieu.mandroid.Adapters;
 
 import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.example.mathieu.mandroid.Activiter.AcitivityVideo;
@@ -14,15 +12,13 @@ import com.example.mathieu.mandroid.Activiter.AcitivityVideo;
  */
 
 public class DrawerEndListenner implements DrawerListener {
-    String path;
-    ViewGroup parent;
-    OnClickListener meta;
-    DrawerLayout lay;
-
-    DrawerEndListenner(String path, final ViewGroup parent,DrawerLayout lay){
+    private String path;
+    private ViewGroup parent;
+    private FileArrayMetadataAdapter fileArrayMetadataAdapter;
+    DrawerEndListenner(String path, final ViewGroup parent,FileArrayMetadataAdapter f){
         this.path=path;
         this.parent=parent;
-        this.lay=lay;
+        this.fileArrayMetadataAdapter=f;
 
     }
     @Override
@@ -39,7 +35,9 @@ public class DrawerEndListenner implements DrawerListener {
     public void onDrawerClosed(View drawerView) {
         Intent intent= new Intent(parent.getContext(),AcitivityVideo.class);
         intent.putExtra("path",path);
+        fileArrayMetadataAdapter.removeBindDrawerListenner();
         parent.getContext().startActivity(intent);
+
 
     }
 

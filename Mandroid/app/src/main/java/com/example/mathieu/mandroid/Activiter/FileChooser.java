@@ -28,6 +28,10 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * File chooser is responsable for display all the file
+ * in the system and let choose the user who is the file containing mus/video/series
+ */
 public class FileChooser extends ListActivity {
 
     private File currentDir;
