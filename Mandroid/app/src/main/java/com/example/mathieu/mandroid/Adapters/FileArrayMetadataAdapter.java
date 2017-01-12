@@ -56,12 +56,12 @@ public class FileArrayMetadataAdapter extends ArrayAdapter<ItemMetadata> {
         if (o != null) {
             TextView t1 = (TextView) v.findViewById(R.id.inputBirate);
             TextView t2 = (TextView) v.findViewById(R.id.inputDate);
-            if(o.getBitrate() ==""){
+            if(o.getBitrate()==null){
                 t1.setText(getContext().getString(R.string.nothing));
             }else{
                 t1.setText(o.getBitrate());
             }
-            if(o.getDateCreation() ==""){
+            if(o.getDateCreation()==null){
                 t2.setText(getContext().getString(R.string.nothing));
             }else {
                 t2.setText(o.getDateCreation());

@@ -43,7 +43,7 @@ public class FileArrayMusicMetadataAdapter extends FileArrayMetadataAdapter {
 
 
             TextView t1 = (TextView) v.findViewById(R.id.echantilText);
-            if (o.getEchantilloage().equals("")) {
+            if (o.getEchantilloage()==null) {
                 t1.setText(getContext().getString(R.string.nothing));
             } else {
                 t1.setText(o.getEchantilloage());
